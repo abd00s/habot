@@ -9,7 +9,7 @@ RSpec.describe Goal, type: :model do
   end
 
   it "has the correct associations" do
-    # should have_many(:events)
+    should have_many(:events)
     should belong_to(:user)
   end
 end
