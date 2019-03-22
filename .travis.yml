@@ -3,10 +3,12 @@ language: ruby
 cache: bundler
 
 services:
-  - mysql
+  — mysql
+
+before_install:
+  — gem install bundler
 
 script:
-  - gem install bundler
   — bundle exec rake db:create
   — bundle exec rake db:migrate
   — bundle exec rspec
