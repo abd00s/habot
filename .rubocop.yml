@@ -12,6 +12,11 @@ Metrics/LineLength:
     - "db/migrate/*"
     - "db/schema.rb"
 
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: true
+  Exclude:
+    - "db/schema.rb"
+
 Naming/VariableNumber:
   EnforcedStyle: snake_case
 
