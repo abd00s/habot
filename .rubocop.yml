@@ -1,0 +1,32 @@
+AllCops:
+  TargetRailsVersion: 5.2
+  TargetRubyVersion: 2.5.1
+
+Layout/AlignHash:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+
+Metrics/LineLength:
+  Enabled: true
+  Exclude:
+    - "db/migrate/*"
+    - "db/schema.rb"
+
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+
+Rails:
+  Enabled: true
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/NumericLiterals:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes
