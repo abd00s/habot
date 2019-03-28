@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_22_215613) do
+ActiveRecord::Schema.define(version: 2019_03_28_210636) do
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "goal_id"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2019_03_22_215613) do
     t.integer "user_id"
     t.string "title"
     t.integer "frequency"
-    t.string "period"
+    t.integer "period", limit: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
