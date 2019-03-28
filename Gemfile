@@ -37,6 +37,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 4.0', '>= 4.0.1'
   gem 'simplecov', require: false
   gem "rubocop"
+  gem 'awesome_print', '~> 1.8'
 end
 
 group :development do
