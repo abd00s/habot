@@ -1,6 +1,6 @@
 class GoalsController < ApplicationController
   def index
-    render json: { goals: goals }
+    render json: goals
   end
 
   private
