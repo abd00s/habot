@@ -40,7 +40,7 @@ group :development, :test do
   gem 'simplecov', require: false
   gem "rubocop"
   gem 'awesome_print', '~> 1.8'
-  gem 'factory_bot_rails'
+  gem "factory_bot_rails"
 end
 
 group :development do
