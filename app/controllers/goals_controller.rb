@@ -7,9 +7,9 @@ class GoalsController < ApplicationController
 
   def create
     if new_goal.valid?
-      render json: new_goal
+      render json: new_goal, status: :created
     else
-      render json: new_goal.errors.messages
+      render json: new_goal.errors.messages, status: :bad_request
     end
   end
 
