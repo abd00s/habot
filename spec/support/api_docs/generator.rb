@@ -5,24 +5,94 @@ module ApiDocs
     end
 
     def initialize(args = {})
-      @request = args[:request]
+      @request  = args[:request]
       @response = args[:response]
     end
 
     def write!
       make_docs_dir unless Dir.exist? docs_root
+      write_doc
     end
+
+    private
 
     def make_docs_dir
       FileUtils.mkdir_p(docs_root)
+    end
+
+    def write_doc
+      File.open(doc_path, "w") do |f|
+        f.puts doc_body
+      end
+    end
+
+    def doc_body
+      <<~BODY
+        ### URL\n
+        ```
+        #{@request.path}
+        ```\n
+        ### Method\n
+        ```
+        #{@request.method}
+        ```\n
+        ### URL Parameters\n
+        URL params are represented as JSON for legibility
+        ```\n
+        #{url_parameters}
+        ```\n
+        ### Data Parameters\n
+        ```
+        #{data_parameters}
+        ```\n
+        ### Success Response\n
+        #### Status\n
+        #{@response.status}\n
+        #### Body\n
+        ```
+        #{response_body}
+        ```
+      BODY
     end
 
     def docs_root
       @docs_root ||= Rails.root.join("docs", controller)
     end
 
+    def doc_path
+      File.join("#{docs_root}/#{file_name}")
+    end
+
+    def file_name
+      "#{action}.md"
+    end
+
+    def action
+      @request.path_parameters[:action]
+    end
+
     def controller
       @request.path_parameters[:controller]
+    end
+
+    def url_parameters
+      params = @request.params.except(:_jsonapi)
+      return "NONE" if params.empty?
+
+      JSON.pretty_generate(params)
+    end
+
+    def data_parameters
+      params = @request.params[:_jsonapi]
+      return "NONE" if params.blank?
+
+      JSON.pretty_generate(params)
+    end
+
+    def response_body
+      return "NONE" if @response.body.empty?
+
+      JSON.pretty_generate(JSON.parse(@response.body))
     end
   end
 end
