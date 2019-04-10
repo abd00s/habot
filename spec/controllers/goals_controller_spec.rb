@@ -6,6 +6,13 @@ RSpec.describe GoalsController, type: :controller do
       get :index
       expect(response).to have_http_status(:success)
     end
+
+    it "generates documenation" do
+      create(:goal)
+
+      get :index
+      write_docs(request: request, response: response)
+    end
   end
 
   describe "POST #create" do
