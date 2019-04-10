@@ -1,7 +1,10 @@
+require "support/api_docs"
+
 require "simplecov"
 SimpleCov.start "rails"
 
 RSpec.configure do |config|
+  config.include ApiDocs
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
