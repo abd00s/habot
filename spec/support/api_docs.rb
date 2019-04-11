@@ -1,4 +1,5 @@
 require_relative "api_docs/generator.rb"
+require_relative "api_docs/index_generator.rb"
 
 module ApiDocs
   GEN_DOCS = ENV["DOCS"].to_s == "true"

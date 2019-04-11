@@ -5,6 +5,8 @@ SimpleCov.start "rails"
 
 RSpec.configure do |config|
   config.include ApiDocs
+
+  config.after(:suite) { ApiDocs::IndexGenerator.run if ApiDocs::GEN_DOCS }
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
