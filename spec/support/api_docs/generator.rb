@@ -36,14 +36,9 @@ module ApiDocs
         ```
         #{@request.method}
         ```\n
-        ### URL Parameters\n
-        URL params are represented as JSON for legibility
+        ### Parameters\n
         ```\n
-        #{url_parameters}
-        ```\n
-        ### Data Parameters\n
-        ```
-        #{data_parameters}
+        #{parameters}
         ```\n
         ### Success Response\n
         #### Status\n
@@ -75,16 +70,9 @@ module ApiDocs
       @request.path_parameters[:controller]
     end
 
-    def url_parameters
-      params = @request.params.except(:_jsonapi)
+    def parameters
+      params = @request.params.except(:controller, :action)
       return "NONE" if params.empty?
-
-      JSON.pretty_generate(params)
-    end
-
-    def data_parameters
-      params = @request.params[:_jsonapi]
-      return "NONE" if params.blank?
 
       JSON.pretty_generate(params)
     end

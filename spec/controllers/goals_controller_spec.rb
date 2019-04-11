@@ -17,6 +17,7 @@ RSpec.describe GoalsController, type: :controller do
 
   describe "POST #create" do
     let(:user) { create(:user) }
+
     describe "with valid params" do
       it "returns http success" do
         post :create, params: valid_create_params
