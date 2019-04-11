@@ -29,6 +29,12 @@ RSpec.describe GoalsController, type: :controller do
           change { Goal.count }.by(1)
         )
       end
+
+      it "generates documenation" do
+        post :create, params: valid_create_params
+
+        write_docs(request: request, response: response)
+      end
     end
 
     describe "with a missing params" do
