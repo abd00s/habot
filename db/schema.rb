@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2019_04_15_171009) do
 
   create_table "goal_periods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "goal_id"
-    t.datetime "start_date"
+    t.date "start_date"
     t.boolean "goal_met", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
