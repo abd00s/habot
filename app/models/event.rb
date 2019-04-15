@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  validates :goal_id, :date, presence: true
+  validates :goal_period_id, :date, presence: true
 
-  belongs_to :goal
+  belongs_to :goal_period
 end

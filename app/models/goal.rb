@@ -3,6 +3,6 @@ class Goal < ApplicationRecord
 
   validates :user_id, :title, :frequency, :period, presence: true
 
-  has_many :events, dependent: :destroy
+  has_many :goal_periods, dependent: :destroy
   belongs_to :user
 end
