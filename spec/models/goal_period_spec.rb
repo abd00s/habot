@@ -1,9 +1,10 @@
 require "rails_helper"
 
 RSpec.describe GoalPeriod, type: :model do
-  it "validates presence of required fields" do
+  it "runs required validations" do
     should validate_presence_of(:goal_id)
     should validate_presence_of(:start_date)
+    should validate_with(BeginningOfWeekValidator).for_attribute(:start_date)
   end
 
   it "has the correct associations" do
