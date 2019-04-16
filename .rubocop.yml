@@ -16,6 +16,7 @@ Metrics/BlockLength:
   Enabled: true
   Exclude:
     - "spec/**/*"
+    - "db/schema.rb"
 
 Layout/EmptyLinesAroundBlockBody:
   Enabled: true
