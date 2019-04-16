@@ -7,7 +7,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 require "support/factory_bot"
 
-Dir[File.expand_path('spec/support/matchers/*.rb')].each {|f| require f}
+Dir[File.expand_path("spec/support/matchers/*.rb")].each { |f| require f }
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
