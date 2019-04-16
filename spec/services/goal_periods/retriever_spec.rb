@@ -1,4 +1,5 @@
 require "rails_helper"
+
 module GoalPeriods
   RSpec.describe Retriever do
     let(:monday) { Time.zone.now.beginning_of_week }
@@ -19,13 +20,13 @@ module GoalPeriods
             expect(goal_period.start_date).to eq(monday)
           end
         end
-      end
 
-      context "when the event date is a Tuesday" do
-        it "creates a goal_period starting on the prior Monday of the week" do
-          goal_period = retrieve_goal_period(tuesday)
+        context "when the event date is a Tuesday" do
+          it "creates a goal_period starting on the prior Monday of the week" do
+            goal_period = retrieve_goal_period(tuesday)
 
-          expect(goal_period.start_date).to eq(monday)
+            expect(goal_period.start_date).to eq(monday)
+          end
         end
       end
     end
