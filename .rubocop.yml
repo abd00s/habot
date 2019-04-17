@@ -32,6 +32,11 @@ Rails:
 Style/Documentation:
   Enabled: false
 
+Style/WordArray:
+  Enabled: true
+  Exclude:
+    - "db/schema.rb"
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 

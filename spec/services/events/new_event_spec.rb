@@ -7,6 +7,19 @@ module Events
     let(:goal) { create(:goal) }
 
     describe ".create" do
+      context "when an Event already exists for the date" do
+        let(:goal_period) do
+          create(:goal_period, goal: goal, start_date: monday)
+        end
+        let!(:existing_event) do
+          create(:event, goal_period: goal_period, date: monday)
+        end
+
+        it "does not create a new Event" do
+          expect { new_event(monday) }.not_to(change { Event.count })
+        end
+      end
+
       context "when no goal_period exists for the period" do
         it "creates a new goal_period record" do
           expect { new_event(monday) }.to change { GoalPeriod.count }
