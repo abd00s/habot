@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_15_171009) do
+ActiveRecord::Schema.define(version: 2019_04_17_171058) do
 
   create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "goal_period_id"
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["goal_period_id", "date"], name: "index_events_on_goal_period_id_and_date", unique: true
   end
 
   create_table "goal_periods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
