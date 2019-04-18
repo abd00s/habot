@@ -6,6 +6,17 @@ module Events
     let(:tuesday) { monday + 1.day }
     let(:goal) { create(:goal) }
 
+    context "with a malformed input date string" do
+      let(:bad_input) { "11111" }
+
+      it "raises " do
+        instance = Events::NewEvent.new(date: bad_input)
+        instance.valid?
+
+        expect(instance.errors[:date]).to include(/YYYY-MM-DD/)
+      end
+    end
+
     describe ".create" do
       context "when an Event already exists for the date" do
         let(:goal_period) do
