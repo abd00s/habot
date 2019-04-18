@@ -37,3 +37,10 @@ en:
           attributes:
             start_date:
               week_start: "must be at beginning of week."
+  activemodel:
+    errors:
+      models:
+        events/new_event:
+          attributes:
+            date:
+              invalid: "Date format must be 'YYYY-MM-DD'"
