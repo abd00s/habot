@@ -2,17 +2,17 @@ class EventsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :create
 
   def create
-    if create_event.valid?
-      render json: create_event.event, status: :created
+    if event_manager.valid?
+      render json: event_manager.event, status: :created
     else
-      render json: create_event.errors, status: :bad_request
+      render json: event_manager.errors, status: :bad_request
     end
   end
 
   private
 
-  def create_event
-    @create_event ||= Events::NewEvent.create(
+  def event_manager
+    @event_manager ||= Events::NewEvent.create(
       goal: goal,
       date: date
     )
