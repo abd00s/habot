@@ -18,6 +18,14 @@ module Events
         it "does not create a new Event" do
           expect { new_event(monday) }.not_to(change { Event.count })
         end
+
+        it "adds the Event#create error to Events::NewEvent's errors" do
+          event_manager = new_event(monday)
+
+          expect { event_manager.valid? }.to change {
+            event_manager.errors[:date].size
+          }.from(0).to(1)
+        end
       end
 
       context "when no goal_period exists for the period" do

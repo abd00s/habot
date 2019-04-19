@@ -2,6 +2,10 @@ module Events
   class NewEvent
     attr_reader :event, :goal_period
 
+    include ActiveModel::Validations
+
+    validate :event_created
+
     def self.create(args = {})
       new(args).tap(&:create)
     end
@@ -26,5 +30,13 @@ module Events
       ).goal_period
     end
     # rubocop:enable Lint/DuplicateMethods
+
+    private
+
+    def event_created
+      return if @event.valid?
+
+      errors.merge!(@event.errors)
+    end
   end
 end
