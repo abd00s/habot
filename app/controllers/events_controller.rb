@@ -27,6 +27,9 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:goal_id, :date)
+    attrs = %w[goal_id date]
+    params.require(:event).permit(*attrs).tap do |event_params|
+      attrrs.each { |attr| event_params.require(attr) }
+    end
   end
 end
