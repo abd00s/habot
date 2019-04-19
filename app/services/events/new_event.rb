@@ -26,5 +26,13 @@ module Events
       ).goal_period
     end
     # rubocop:enable Lint/DuplicateMethods
+
+    private
+
+    def event_created
+      return if @event.valid?
+
+      errors.merge!(@event.errors)
+    end
   end
 end
