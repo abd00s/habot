@@ -4,7 +4,7 @@ module Events
 
     include ActiveModel::Validations
 
-    validate :event_created, on: :create
+    validate :event_created
 
     def self.create(args = {})
       new(args).tap(&:create)
