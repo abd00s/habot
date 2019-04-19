@@ -24,6 +24,9 @@ class GoalsController < ApplicationController
   end
 
   def goal_params
-    params.require(:goal).permit(:user_id, :title, :frequency, :period)
+    attrrs = %w[user_id title frequency period]
+    params.require(:goal).permit(*attrrs).tap do |goal_params|
+      attrrs.each { |attr| goal_params.require(attr) }
+    end
   end
 end
