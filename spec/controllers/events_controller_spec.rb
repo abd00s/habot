@@ -10,7 +10,7 @@ RSpec.describe EventsController, type: :controller do
       end
 
       it "returns http bad request" do
-        get :create, params: invalid_params
+        post :create, params: invalid_params
 
         expect(response).to have_http_status(:bad_request)
       end
