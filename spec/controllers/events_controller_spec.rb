@@ -9,7 +9,7 @@ RSpec.describe EventsController, type: :controller do
         valid_create_params.tap { |p| p.dig(:event).except!(:date) }
       end
 
-      it "returns http success" do
+      it "returns http bad request" do
         get :create, params: invalid_params
 
         expect(response).to have_http_status(:bad_request)
