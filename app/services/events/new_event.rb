@@ -11,8 +11,8 @@ module Events
     end
 
     def initialize(args = {})
-      @goal = args[:goal]
-      @date = args[:date]
+      @goal = Goal.find(args[:goal_id])
+      @date = Date.parse(args[:date])
     end
 
     def create

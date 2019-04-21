@@ -13,17 +13,9 @@ class EventsController < ApplicationController
 
   def event_manager
     @event_manager ||= Events::NewEvent.create(
-      goal: goal,
-      date: date
+      goal_id: event_params[:goal_id].to_i,
+      date:    event_params[:date]
     )
-  end
-
-  def goal
-    @goal ||= Goal.find(event_params[:goal_id])
-  end
-
-  def date
-    @date ||= Date.parse(event_params[:date])
   end
 
   def event_params
