@@ -1,24 +1,10 @@
-# README
+# Habot
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Habot is a habit tracking, enforcement and reminder tool.
 
-Things you may want to cover:
+## API Docs
 
-* Ruby version
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* [events/create.md](docs/events/create.md)
+* [goals/create.md](docs/goals/create.md)
+* [goals/index.md](docs/goals/index.md)
