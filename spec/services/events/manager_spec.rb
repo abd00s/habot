@@ -1,7 +1,7 @@
 require "rails_helper"
 
 module Events
-  RSpec.describe NewEvent do
+  RSpec.describe Manager do
     let(:monday) { Time.zone.now.beginning_of_week }
     let(:tuesday) { monday + 1.day }
     let(:goal) { create(:goal) }
@@ -19,7 +19,7 @@ module Events
           expect { new_event(monday) }.not_to(change { Event.count })
         end
 
-        it "adds the Event#create error to Events::NewEvent's errors" do
+        it "adds the events#create error to Events::Manager's errors" do
           event_manager = new_event(monday)
 
           expect { event_manager.valid? }.to change {
@@ -80,7 +80,7 @@ module Events
     end
 
     def new_event(day)
-      Events::NewEvent.create(
+      Events::Manager.create_new(
         goal_id: goal.id,
         date:    day.strftime(" %Y-%m-%e")
       )
