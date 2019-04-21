@@ -41,6 +41,7 @@ group :development, :test do
   gem "rubocop"
   gem 'awesome_print', '~> 1.8'
   gem "factory_bot_rails"
+  gem "mocha"
 end
 
 group :development do

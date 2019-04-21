@@ -47,7 +47,7 @@ RSpec.describe GoalsController, type: :controller do
         expect(response).to have_http_status(:bad_request)
       end
 
-      it "creates a Goal record" do
+      it "does not create a Goal record" do
         expect { post :create, params: invalid_params }.to_not(
           change { Goal.count }
         )
