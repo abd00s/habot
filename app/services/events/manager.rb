@@ -1,12 +1,12 @@
 module Events
-  class NewEvent
+  class Manager
     attr_reader :event, :goal_period
 
     include ActiveModel::Validations
 
     validate :event_created
 
-    def self.create(args = {})
+    def self.create_new(args = {})
       new(args).tap(&:create)
     end
 

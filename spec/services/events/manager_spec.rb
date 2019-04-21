@@ -1,7 +1,7 @@
 require "rails_helper"
 
 module Events
-  RSpec.describe NewEvent do
+  RSpec.describe Manager do
     let(:monday) { Time.zone.now.beginning_of_week }
     let(:tuesday) { monday + 1.day }
     let(:goal) { create(:goal) }
@@ -19,7 +19,7 @@ module Events
           expect { new_event(monday) }.not_to(change { Event.count })
         end
 
-        it "adds the Event#create error to Events::NewEvent's errors" do
+        it "adds the events#create error to Events::Manager's errors" do
           event_manager = new_event(monday)
 
           expect { event_manager.valid? }.to change {
@@ -35,9 +35,11 @@ module Events
         end
 
         it "creates an Event record associated to the new GoalPeriod" do
-          event = new_event(tuesday)
+          event_manager = new_event(tuesday)
 
-          expect(event.goal_period).to eq(event.event.goal_period)
+          expect(event_manager.goal_period).to(
+            eq(event_manager.event.goal_period)
+          )
         end
       end
 
@@ -48,9 +50,9 @@ module Events
           end
 
           it "creates an Event record associated to the existing GoalPeriod" do
-            event = new_event(tuesday)
+            event_manager = new_event(tuesday)
 
-            expect(event.goal_period).to eq(exsisting_goal_period)
+            expect(event_manager.goal_period).to eq(exsisting_goal_period)
           end
         end
 
@@ -65,22 +67,24 @@ module Events
           end
 
           it "creates an Event record associated to the new GoalPeriod" do
-            event = new_event(tuesday)
+            event_manager = new_event(tuesday)
 
-            expect(event.goal_period).to eq(event.event.goal_period)
+            expect(event_manager.goal_period).to(
+              eq(event_manager.event.goal_period)
+            )
           end
 
           it "does not associate Event to the existing GoalPeriod" do
-            event = new_event(tuesday)
+            event_manager = new_event(tuesday)
 
-            expect(event.goal_period).not_to eq(exsisting_goal_period)
+            expect(event_manager.goal_period).not_to eq(exsisting_goal_period)
           end
         end
       end
     end
 
     def new_event(day)
-      Events::NewEvent.create(
+      Events::Manager.create_new(
         goal_id: goal.id,
         date:    day.strftime(" %Y-%m-%e")
       )
