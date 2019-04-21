@@ -58,6 +58,12 @@ RSpec.describe EventsController, type: :controller do
 
           expect(response).to have_http_status(:bad_request)
         end
+
+        it "does not create any Events" do
+          expect { post :create, params: valid_create_params }.not_to(change do
+            Event.count
+          end)
+        end
       end
     end
 
@@ -70,6 +76,12 @@ RSpec.describe EventsController, type: :controller do
         post :create, params: invalid_params
 
         expect(response).to have_http_status(:bad_request)
+      end
+
+      it "does not create any Events" do
+        expect { post :create, params: invalid_params }.not_to(change do
+          Event.count
+        end)
       end
     end
   end
