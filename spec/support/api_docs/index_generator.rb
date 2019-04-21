@@ -44,7 +44,15 @@ module ApiDocs
     end
 
     def line_item(file)
-      "* [#{chomp_local_path(file)}](docs/#{chomp_local_path(file)})"
+      "* [#{endpoint(file)}](#{path_to_doc(file)})"
+    end
+
+    def endpoint(file)
+      chomp_local_path(file).chomp(".md")
+    end
+
+    def path_to_doc(file)
+      "docs/#{chomp_local_path(file)}"
     end
 
     def files
