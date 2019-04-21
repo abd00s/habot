@@ -10,6 +10,7 @@ RSpec.describe Goal, type: :model do
 
   it "has the correct associations" do
     should have_many(:goal_periods)
+    should have_many(:events).through(:goal_periods)
     should belong_to(:user)
   end
 end
