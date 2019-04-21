@@ -35,9 +35,11 @@ module Events
         end
 
         it "creates an Event record associated to the new GoalPeriod" do
-          event = new_event(tuesday)
+          event_manager = new_event(tuesday)
 
-          expect(event.goal_period).to eq(event.event.goal_period)
+          expect(event_manager.goal_period).to(
+            eq(event_manager.event.goal_period)
+          )
         end
       end
 
@@ -48,9 +50,9 @@ module Events
           end
 
           it "creates an Event record associated to the existing GoalPeriod" do
-            event = new_event(tuesday)
+            event_manager = new_event(tuesday)
 
-            expect(event.goal_period).to eq(exsisting_goal_period)
+            expect(event_manager.goal_period).to eq(exsisting_goal_period)
           end
         end
 
@@ -65,15 +67,17 @@ module Events
           end
 
           it "creates an Event record associated to the new GoalPeriod" do
-            event = new_event(tuesday)
+            event_manager = new_event(tuesday)
 
-            expect(event.goal_period).to eq(event.event.goal_period)
+            expect(event_manager.goal_period).to(
+              eq(event_manager.event.goal_period)
+            )
           end
 
           it "does not associate Event to the existing GoalPeriod" do
-            event = new_event(tuesday)
+            event_manager = new_event(tuesday)
 
-            expect(event.goal_period).not_to eq(exsisting_goal_period)
+            expect(event_manager.goal_period).not_to eq(exsisting_goal_period)
           end
         end
       end
