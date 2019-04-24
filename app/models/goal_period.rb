@@ -4,4 +4,6 @@ class GoalPeriod < ApplicationRecord
 
   belongs_to :goal
   has_many :events, dependent: :destroy
+
+  delegate :frequency, to: :goal
 end

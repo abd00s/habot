@@ -12,6 +12,10 @@ RSpec.describe GoalPeriod, type: :model do
     should have_many(:events)
   end
 
+  it "delegates methods" do
+    should delegate_method(:frequency).to(:goal)
+  end
+
   context "with an invalid start_date" do
     let(:tuesday) { Time.zone.now.beginning_of_week + 1.day }
     subject { create(:goal_period) }
