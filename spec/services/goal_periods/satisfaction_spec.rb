@@ -42,7 +42,6 @@ module GoalPeriods
             end
           end
         end
-
       end
 
       context "when goal is currently met for goal_period" do
@@ -75,8 +74,14 @@ module GoalPeriods
         end
 
         context "and becomes unmet after run" do
-          it "toggles goal_period `goal_met` to false" do
+          setup do
+            goal_period.events.stubs(:count).returns(goal_frequency - 1)
+          end
 
+          it "toggles goal_period `goal_met` to false" do
+            expect { verify!(goal_period) }.to(
+              change { goal_period.goal_met }.from(true).to(false)
+            )
           end
         end
       end
