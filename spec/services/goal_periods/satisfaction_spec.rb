@@ -15,24 +15,36 @@ module GoalPeriods
               change { goal_period.goal_met }
             )
           end
-
-          def verify!(goal_period)
-            GoalPeriods::Satisfaction.verify!(goal_period: goal_period)
-          end
         end
 
         context "and becomes met after run" do
           context "when the frequency exceeds the goal" do
-            it "goal_period becomes met (`goal_met` toggled to true)" do
+            setup do
+              goal_period.events.stubs(:count).returns(goal_frequency + 1)
+            end
 
+            it "goal_period becomes met (`goal_met` toggled to true)" do
+              expect { verify!(goal_period) }.to(
+                change { goal_period.goal_met }.from(false).to(true)
+              )
             end
           end
 
           context "when the frequency equals the goal" do
-            it "goal_period becomes met (`goal_met` toggled to true)" do
+            setup do
+              goal_period.events.stubs(:count).returns(goal_frequency)
+            end
 
+            it "goal_period becomes met (`goal_met` toggled to true)" do
+              expect { verify!(goal_period) }.to(
+                change { goal_period.goal_met }.from(false).to(true)
+              )
             end
           end
+        end
+
+        def verify!(goal_period)
+          GoalPeriods::Satisfaction.verify!(goal_period: goal_period)
         end
       end
 
