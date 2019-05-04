@@ -29,7 +29,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem "rack-cors"
 
-gem 'aws-sdk-sns'
+gem "aws-sdk-sns"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
