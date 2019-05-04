@@ -49,6 +49,8 @@ test:
 #
 production:
   <<: *default
-  database: habot_production
-  username: habot
-  password: <%= ENV['HABOT_DATABASE_PASSWORD'] %>
+  database: habot
+  username: <%= Rails.application.credentials.dig(:mysql, :username) %>
+  password: <%= Rails.application.credentials.dig(:mysql, :password) %>
+  host: <%= Rails.application.credentials.dig(:mysql, :host) %>
+  port: <%= Rails.application.credentials.dig(:mysql, :port) %>
