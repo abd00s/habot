@@ -15,9 +15,9 @@ RSpec.describe Event, type: :model do
     let!(:event) { create(:event) }
 
     it "does not allow duplicate values on `goal_period` and `date`" do
-      assert_raises ActiveRecord::RecordNotUnique do
-        insert_duplicate_record
-      end
+      expect { insert_duplicate_record }.to(
+        raise_error(ActiveRecord::RecordNotUnique)
+      )
     end
   end
 
