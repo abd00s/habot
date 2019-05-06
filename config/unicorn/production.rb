@@ -22,7 +22,7 @@ stdout_path "/var/www/habot/shared/log/unicorn.stdout.log"
 pid "/var/www/habot/shared/pids/unicorn.pid"
 
 before_exec do |server|
-  ENV["BUNDLE_GEMFILE"] = "#{app_dir}/current/Gemfile"
+  ENV["BUNDLE_GEMFILE"] = "#{app_dir}/Gemfile"
 end
 
 before_fork do |server, _worker|
