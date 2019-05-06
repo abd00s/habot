@@ -4,7 +4,7 @@ lock "~> 3.11.0"
 set :application, "habot"
 set :repo_url, "git@github.com:abd00s/habot.git"
 
-set :branch, ENV['BRANCH'] if ENV['BRANCH']
+set :branch, ENV["BRANCH"] if ENV["BRANCH"]
 # set :branch, :master
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -28,6 +28,8 @@ append :linked_files, "config/secrets.yml", "config/database.yml"
 # Default value for linked_dirs is []
 append :linked_dirs, "bin", "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "vendor/bundle"
 
+set :unicorn_pid, "/var/www/habot/shared/pids/unicorn.pid"
+
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
@@ -43,7 +45,8 @@ set :keep_releases, 5
 namespace :deploy do
   desc "Restart application"
   task :restart do
-  invoke "unicorn:restart"
+    invoke "unicorn:restart"
   end
- end
- after "deploy:publishing", "deploy:restart"
+end
+
+after "deploy:publishing", "deploy:restart"

@@ -46,6 +46,13 @@ group :development, :test do
   gem 'awesome_print', '~> 1.8'
   gem "factory_bot_rails"
   gem "mocha"
+
+  gem "capistrano", require: false
+  gem "capistrano-rails", require: false
+  gem "capistrano-bundler", require: false
+  gem "capistrano-rbenv", require: false
+  gem "capistrano3-unicorn", require: false
+  gem "capistrano-secrets-yml", require: false
 end
 
 group :development do
