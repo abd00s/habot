@@ -40,3 +40,7 @@ before_fork do |server, _worker|
     end
   end
 end
+
+before_exec do |server|
+  ENV["BUNDLE_GEMFILE"] = "#{app_dir}/Gemfile"
+end
