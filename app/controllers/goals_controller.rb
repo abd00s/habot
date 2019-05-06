@@ -2,7 +2,7 @@ class GoalsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :create
 
   def index
-    render json: {hi: "there"}
+    render json: goals
   end
 
   def create
