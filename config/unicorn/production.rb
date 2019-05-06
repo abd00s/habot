@@ -27,7 +27,7 @@ before_fork do |server, worker|
   # as there's no need for the master process to hold a connection
   # if defined?(ActiveRecord::Base)
   #   ActiveRecord::Base.connection.disconnect!
-  end
+  # end
 
   # Before forking, kill the master process that belongs to the .oldbin PID.
   # This enables 0 downtime deploys.
