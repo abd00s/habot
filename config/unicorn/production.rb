@@ -19,7 +19,7 @@ stdout_path "/var/www/habot/shared/log/unicorn.stdout.log"
 # Set master PID location
 pid "/var/www/habot/shared/pids/unicorn.pid"
 
-before_exec do
+before_exec do |_server|
   ENV["BUNDLE_GEMFILE"] = "#{app_dir}/Gemfile"
 end
 
