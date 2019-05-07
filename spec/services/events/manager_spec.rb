@@ -86,7 +86,7 @@ module Events
     def new_event(day)
       Events::Manager.create_new(
         goal_id: goal.id,
-        date:    day.strftime(" %Y-%m-%e")
+        date:    day.strftime("%Y-%m-%d")
       )
     end
   end
