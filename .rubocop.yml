@@ -11,6 +11,7 @@ Metrics/LineLength:
   Exclude:
     - "db/migrate/*"
     - "db/schema.rb"
+    - "Capfile"
 
 Metrics/BlockLength:
   Enabled: true
