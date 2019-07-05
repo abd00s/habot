@@ -13,6 +13,11 @@ Metrics/LineLength:
     - "db/schema.rb"
     - "Capfile"
 
+Metrics/ModuleLength:
+  Enabled: true
+  Exclude:
+    - "spec/**/*"
+
 Metrics/BlockLength:
   Enabled: true
   Exclude:
