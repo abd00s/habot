@@ -48,6 +48,32 @@ module Goals
           end
         end
       end
+
+      context "when goal has been met" do
+        before(:all) { travel_to wednesday_of_next_week }
+        let(:goal_period) { create(:goal_period, goal: goal, goal_met: true) }
+        setup do
+          2.times do |i|
+            create(:event,
+                   goal_period: goal_period,
+                   date:        Time.zone.now - i)
+          end
+        end
+
+        let(:number_of_events) { 2 }
+        let(:wednesday_to_sunday) { 5 }
+
+        it "provides the satisfaction message" do
+          expected_update = I18n.t("notifications.goal.met",
+                                   number_of_events: number_of_events,
+                                   frequency:        goal.frequency,
+                                   days_remaining:   wednesday_to_sunday)
+          expected = "#{goal.title}: #{expected_update}"
+          actual = compose(goal)
+
+          expect(actual).to eq(expected)
+        end
+      end
     end
 
     def compose(goal)
