@@ -74,6 +74,31 @@ module Goals
           expect(actual).to eq(expected)
         end
       end
+
+      context "when goal has been missed" do
+        before(:all) { travel_to sunday_of_next_week }
+        let(:goal_period) { create(:goal_period, goal: goal, goal_met: false) }
+        setup do
+          goal.update(frequency: 3)
+          create(:event,
+                 goal_period: goal_period,
+                 date:        Time.zone.now - 1)
+        end
+
+        let(:number_of_events) { 1 }
+        let(:sunday_inclusive) { 1 }
+
+        it "provides the satisfaction message" do
+          expected_update = I18n.t("notifications.goal.missed",
+                                   number_of_events: number_of_events,
+                                   frequency:        goal.frequency,
+                                   days_remaining:   sunday_inclusive)
+          expected = "#{goal.title}: #{expected_update}"
+          actual = compose(goal)
+
+          expect(actual).to eq(expected)
+        end
+      end
     end
 
     def compose(goal)
