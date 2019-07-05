@@ -3,8 +3,7 @@ require "rails_helper"
 module Goals
   RSpec.describe NotificationManager do
     describe ".run" do
-      let(:goal_frequency) { 2 }
-      let(:goal) { create(:goal, frequency: goal_frequency) }
+      let(:goal) { create(:goal) }
 
       it "invoked the SMS delivery service" do
         expected_arguments = {
