@@ -21,10 +21,10 @@ module Goals
     end
 
     def goal_period
-      @goal_period ||= GoalPeriod.find_by(
-        goal:       @goal,
-        start_date: today.beginning_of_week
-      )
+      @goal_period ||= GoalPeriods::Retriever.run(
+        goal: @goal,
+        date: today
+      ).goal_period
     end
 
     def goal_met_message

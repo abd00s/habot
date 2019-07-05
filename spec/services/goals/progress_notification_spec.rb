@@ -99,6 +99,26 @@ module Goals
           expect(actual).to eq(expected)
         end
       end
+
+      context "when no events are logged at all" do
+        before(:all) { travel_to wednesday_of_next_week }
+
+        let(:number_of_events) { 0 }
+        let(:wednesday_to_sunday) { 5 }
+        let(:check_ins_required) { goal.frequency }
+
+        it "provides the satisfaction message" do
+          expected_update = I18n.t("notifications.goal.attainable",
+                                   number_of_events: number_of_events,
+                                   frequency:        goal.frequency,
+                                   days_remaining:   wednesday_to_sunday,
+                                   delta:            check_ins_required)
+          expected = "#{goal.title}: #{expected_update}"
+          actual = compose(goal)
+
+          expect(actual).to eq(expected)
+        end
+      end
     end
 
     def compose(goal)
