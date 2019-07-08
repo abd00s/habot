@@ -5,7 +5,7 @@ module GoalPeriods
     end
 
     def self.ping
-      "pong"
+      ProgressNotificationWorker.perform_async
     end
   end
 end
