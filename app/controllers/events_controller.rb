@@ -9,6 +9,10 @@ class EventsController < ApplicationController
     end
   end
 
+  def ping
+    render json: GoalPeriods::Dummy.ping
+  end
+
   private
 
   def event_manager
