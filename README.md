@@ -2,6 +2,9 @@
 
 Habot is a habit tracking, enforcement and reminder tool.
 
+## Data Model
+
+* [UML](docs/data_model.md)
 ## API Docs
 
 
