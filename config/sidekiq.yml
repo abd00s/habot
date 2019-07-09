@@ -1,0 +1,4 @@
+:schedule:
+  daily_progress_notification:
+    every: "5m"
+    class: ProgressNotificationWorker
