@@ -27,6 +27,8 @@ module ApiDocs
       <<~DOC
         # Habot\n
         Habot is a habit tracking, enforcement and reminder tool.\n
+        ## Data Model\n
+        * [UML](docs/data_model.md)
         ## API Docs\n\n
       DOC
     end
@@ -56,7 +58,11 @@ module ApiDocs
     end
 
     def files
-      Dir["#{docs_dir}/**/*.md"].sort.reject { |f| f == index_file.to_s }
+      Dir["#{docs_dir}/**/*.md"].sort.reject { |f| excluded_files.include?(f) }
+    end
+
+    def excluded_files
+      [index_file.to_s, uml_file.to_s]
     end
 
     def docs_dir
@@ -65,6 +71,10 @@ module ApiDocs
 
     def readme_file
       Rails.root.join("README.md")
+    end
+
+    def uml_file
+      @uml_file ||= docs_dir.join("data_model.md")
     end
 
     def index_file
