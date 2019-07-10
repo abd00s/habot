@@ -84,12 +84,12 @@ RSpec.describe EventsController, type: :controller do
         end)
       end
     end
-  end
 
-  it "generates documentaion" do
-    post :create, params: valid_create_params
+    it "generates documentaion" do
+      post :create, params: valid_create_params
 
-    write_docs(request: request, response: response)
+      write_docs(request: request, response: response)
+    end
   end
 
   def valid_create_params
