@@ -6,9 +6,9 @@ RSpec.describe EventsController, type: :controller do
   describe "POST #create" do
     context "with params present" do
       it "calls the new event manager passing the params as arguments" do
-        mock = Events::Manager.create_new(valid_create_params[:event])
+        mock = Events::Manager.run(valid_create_params[:event])
 
-        Events::Manager.expects(:create_new)
+        Events::Manager.expects(:run)
                        .with(valid_create_params[:event])
                        .returns(mock)
 
