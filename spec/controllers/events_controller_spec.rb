@@ -1,14 +1,16 @@
 require "rails_helper"
 
 RSpec.describe EventsController, type: :controller do
-  let(:goal) { create(:goal) }
+  include ActiveSupport::Testing::TimeHelpers
+
+  let(:goal) { create(:goal, frequency: 2) }
 
   describe "POST #create" do
     context "with params present" do
       it "calls the new event manager passing the params as arguments" do
-        mock = Events::Manager.create_new(valid_create_params[:event])
+        mock = Events::Manager.run(valid_create_params[:event])
 
-        Events::Manager.expects(:create_new)
+        Events::Manager.expects(:run)
                        .with(valid_create_params[:event])
                        .returns(mock)
 
@@ -84,20 +86,61 @@ RSpec.describe EventsController, type: :controller do
         end)
       end
     end
+
+    context "when goal remains unmet" do
+      let!(:goal_period) do
+        create(:goal_period,
+               goal:       goal,
+               start_date: Time.zone.now.beginning_of_week)
+      end
+
+      it "does not toggle the goal period's satisfaction to true" do
+        expect do
+          post :create, params: valid_create_params(Time.zone.now)
+        end.not_to(change { goal_period.reload.goal_met? })
+      end
+    end
+
+    context "when goal becomes met" do
+      before(:all) do
+        travel_to wednesday_of_next_week
+      end
+
+      let(:goal_period) do
+        create(:goal_period,
+               goal:       goal,
+               start_date: Time.zone.now.beginning_of_week)
+      end
+      let!(:event) do
+        create(:event,
+               date:        Time.zone.yesterday,
+               goal_period: goal_period)
+      end
+
+      it "toggles the goal period's satisfaction to true" do
+        expect { post :create, params: valid_create_params(Time.zone.now) }.to(
+          change { goal_period.reload.goal_met? }.from(false).to(true)
+        )
+      end
+    end
+
+    it "generates documentaion" do
+      post :create, params: valid_create_params
+
+      write_docs(request: request, response: response)
+    end
   end
 
-  it "generates documentaion" do
-    post :create, params: valid_create_params
-
-    write_docs(request: request, response: response)
-  end
-
-  def valid_create_params
+  def valid_create_params(date = "2019-01-02")
     @valid_create_params ||= {
       event: {
         goal_id: goal.id,
-        date:    "2019-01-02"
+        date:    date
       }
     }
+  end
+
+  def wednesday_of_next_week
+    Time.zone.now.next_week.next_day(2)
   end
 end

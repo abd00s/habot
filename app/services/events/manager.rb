@@ -6,8 +6,13 @@ module Events
 
     validate :event_created
 
-    def self.create_new(args = {})
-      new(args).tap(&:create)
+    def self.run(args = {})
+      manager = new(args)
+
+      manager.create_new_event
+      manager.run_satisfaction_check
+
+      manager
     end
 
     def initialize(args = {})
@@ -15,11 +20,15 @@ module Events
       @date = Date.parse(args[:date])
     end
 
-    def create
+    def create_new_event
       @event = Event.create(
         goal_period: goal_period,
         date:        @date
       )
+    end
+
+    def run_satisfaction_check
+      GoalPeriods::Satisfaction.verify!(goal_period: goal_period)
     end
 
     # rubocop:disable Lint/DuplicateMethods

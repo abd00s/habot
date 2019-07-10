@@ -12,7 +12,7 @@ class EventsController < ApplicationController
   private
 
   def event_manager
-    @event_manager ||= Events::Manager.create_new(
+    @event_manager ||= Events::Manager.run(
       goal_id: event_params[:goal_id].to_i,
       date:    event_params[:date]
     )
