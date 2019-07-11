@@ -1,10 +1,9 @@
 class ProgressNotificationWorker
   include Sidekiq::Worker
 
-  def perform
-    Aws::Sns::Sms.send_single(
-      message:      "from worker",
-      phone_number: "Rails.application.credentials.test_data[:phone_number]"
-    )
+  def perform(goal_id)
+    goal = Goal.find(goal_id)
+
+    Goals::NotificationManager.run(goal: goal)
   end
 end

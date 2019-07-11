@@ -1,0 +1,4 @@
+:schedule:
+  daily_progress_notification:
+    class: QueueGoalsProgressNotificationsWorker
+    # cron: "0 7 * * *"
