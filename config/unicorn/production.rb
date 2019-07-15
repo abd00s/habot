@@ -1,7 +1,7 @@
 # rubocop:disable all
 
 # set path to application
-app_dir = File.expand_path("../../..", __FILE__)
+app_dir = File.expand_path("../..", __FILE__)
 working_directory app_dir
 
 # Set unicorn options
