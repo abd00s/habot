@@ -45,6 +45,11 @@ namespace :sidekiq do
       execute :sudo, :systemctl, :restart, :sidekiq
     end
   end
+  task :stop do
+    on roles(:app) do
+      execute :sudo, :systemctl, :stop, :sidekiq
+    end
+  end
 end
 
 after "deploy:starting", "sidekiq:quiet"
