@@ -1,12 +1,12 @@
 language: ruby
 
-# cache: bundler
+cache: bundler
 
 services:
   - mysql
 
 before_install:
-  - gem install bundler
+  - gem install bundler -v 1.17.1
 
 script:
   - cp config/database.yml.travis config/database.yml
