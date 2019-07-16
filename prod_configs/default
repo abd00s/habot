@@ -2,7 +2,7 @@
 
 upstream app {
     # Path to Unicorn SOCK file, as defined previously
-    server unix:/var/www/habot/shared/sockets/unicorn.sock fail_timeout=0;
+    server unix:/var/www/habot/shared/tmp/sockets/unicorn.sock fail_timeout=0;
 }
 
 server {
