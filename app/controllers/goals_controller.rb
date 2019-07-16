@@ -13,6 +13,11 @@ class GoalsController < ApplicationController
     end
   end
 
+  def dummy
+    DummyWorker.perform_async
+    head :no_content
+  end
+
   private
 
   def goals
