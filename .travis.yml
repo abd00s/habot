@@ -1,12 +1,11 @@
 language: ruby
 
-cache: bundler
+# cache: bundler
 
 services:
   - mysql
 
 before_install:
-  - gem uninstall bundler
   - gem install bundler
 
 script:
