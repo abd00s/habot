@@ -15,7 +15,7 @@ set :pty, true
 
 append :linked_files, "config/secrets.yml", "config/database.yml"
 
-append :linked_dirs, "bin", "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "vendor/bundle"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "vendor/bundle"
 
 set :unicorn_pid, "/var/www/habot/shared/pids/unicorn.pid"
 
