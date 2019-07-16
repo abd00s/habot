@@ -10,7 +10,7 @@ preload_app true
 timeout 30
 
 # Set up socket location
-listen "/var/www/habot/shared/sockets/unicorn.sock", backlog: 64
+listen "/var/www/habot/shared/tmp/sockets/unicorn.sock", backlog: 64
 
 # Logging
 stderr_path "/var/www/habot/shared/log/unicorn.stderr.log"
