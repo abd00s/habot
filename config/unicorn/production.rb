@@ -1,7 +1,7 @@
 # rubocop:disable all
 
 # set path to application
-app_dir = File.expand_path("../../..", __FILE__)
+app_dir = "/var/www/habot/current"
 working_directory app_dir
 
 # Set unicorn options
@@ -10,7 +10,7 @@ preload_app true
 timeout 30
 
 # Set up socket location
-listen "/var/www/habot/shared/sockets/unicorn.sock", backlog: 64
+listen "/var/www/habot/shared/tmp/sockets/unicorn.sock", backlog: 64
 
 # Logging
 stderr_path "/var/www/habot/shared/log/unicorn.stderr.log"
