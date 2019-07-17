@@ -6,7 +6,7 @@ module Events
     let(:tuesday) { monday + 1.day }
     let(:goal) { create(:goal) }
 
-    describe ".create" do
+    describe ".run" do
       context "when an Event already exists for the date" do
         let(:goal_period) do
           create(:goal_period, goal: goal, start_date: monday)
