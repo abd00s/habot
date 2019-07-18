@@ -28,6 +28,8 @@ module Events
     end
 
     def run_satisfaction_check
+      return if goal_period.goal_met?
+
       GoalPeriods::Satisfaction.verify!(goal_period: goal_period)
     end
 

@@ -6,7 +6,7 @@ module Events
     let(:tuesday) { monday + 1.day }
     let(:goal) { create(:goal) }
 
-    describe ".create" do
+    describe ".run" do
       context "when an Event already exists for the date" do
         let(:goal_period) do
           create(:goal_period, goal: goal, start_date: monday)
@@ -78,6 +78,18 @@ module Events
             event_manager = new_event(tuesday)
 
             expect(event_manager.goal_period).not_to eq(exsisting_goal_period)
+          end
+        end
+
+        context "and the goal is met for the period" do
+          let!(:exsisting_goal_period) do
+            create(:goal_period, goal: goal, goal_met: true)
+          end
+
+          it "should not run the satisfaction check" do
+            GoalPeriods::Satisfaction.expects(:verify!).never
+
+            new_event(monday)
           end
         end
       end
